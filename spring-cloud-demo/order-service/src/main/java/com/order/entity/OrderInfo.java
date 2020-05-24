@@ -10,7 +10,7 @@ public class OrderInfo {
 
     private String orderNum;
 
-    private int orderState;
+    private String enterpriseId;
 
     private long updateTime;
 

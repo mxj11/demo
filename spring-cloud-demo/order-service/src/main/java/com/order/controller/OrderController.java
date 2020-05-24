@@ -13,9 +13,10 @@ public class OrderController {
 
     @RequestMapping(value = "/v1/place", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult order(@RequestParam("userId") String userId, @RequestParam("productId") String productId) {
+    public ResponseResult order(@RequestParam("userId") String userId, @RequestParam("productId") String productId,
+                                @RequestParam("enterpriseId") String enterpriseId) {
         try {
-            return orderService.order(userId, productId);
+            return orderService.order(userId, productId, enterpriseId);
         } catch (Exception ex) {
             System.out.println(ex);
             return new ResponseResult(500, "internal error");
