@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface InventoryMapper {
-    @Update("UPDATE t_store SET count=#{count} where enterpriseId=#{enterpriseId} AND productId=#{productId}")
+    @Update("UPDATE t_store SET count=#{count} WHERE enterpriseId=#{enterpriseId} AND productId=#{productId}")
     int update(InventoryInfo inventoryInfo);
 
     @Select("SELECT count FROM t_store where enterpriseId=#{enterpriseId} AND productId=#{productId}")

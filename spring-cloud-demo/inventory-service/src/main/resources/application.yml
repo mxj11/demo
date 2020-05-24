@@ -20,6 +20,11 @@ eureka:
     # 每隔3秒发送一次心跳
     leaseExpirationDurationInSeconds: 3
 
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: orderGroup
+
 
 
 

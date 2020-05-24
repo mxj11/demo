@@ -1,31 +1,32 @@
 package com.inventory.service.impl;
 
-import com.common.response.ResponseResult;
 import com.inventory.entity.InventoryInfo;
 import com.inventory.mapper.InventoryMapper;
 import com.inventory.service.InventoryService;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Service
-@RequestMapping("/inventory")
 public class InventoryServiceImpl implements InventoryService {
     @Autowired
     private InventoryMapper inventoryMapper;
 
-    @RequestMapping(value = "/v1/reduce", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseResult reduce(String enterpriseId, String productId) {
-        ResponseResult responseResult = new ResponseResult(200, "success");
+    public void reduce(String enterpriseId, String productId) {
         InventoryInfo inventoryInfo = inventoryMapper.find(enterpriseId, productId);
-        inventoryInfo.setEnterpriseId(enterpriseId);
-        inventoryInfo.setProductId(productId);
-        responseResult.setData(inventoryInfo);
-        return responseResult;
+        int count = inventoryInfo.getCount();
+        if (count >= 1) {
+            inventoryInfo.setProductId(productId);
+            inventoryInfo.setEnterpriseId(enterpriseId);
+            inventoryInfo.setCount(count - 1);
+            int row = inventoryMapper.update(inventoryInfo);
+            if (row > 0) {
+                System.out.println("库存扣减成功");
+                return;
+            }
+            System.out.println("库存扣减失败");
+            return;
+        }
+        System.out.println("库存扣减不足");
     }
 
     @Override

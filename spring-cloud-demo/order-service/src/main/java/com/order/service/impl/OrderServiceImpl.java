@@ -5,7 +5,9 @@ import com.order.entity.OrderInfo;
 import com.order.mapper.OrderMapper;
 import com.order.mapper.OrderStateMapper;
 import com.order.service.OrderService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderStateMapper orderStateMapper;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Transactional
     @Override
@@ -33,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
         orderInfo.setProductId(productId);
         orderMapper.order(orderInfo);
         orderStateMapper.insertOrderState(userId, productId, orderNum,1);
+        rocketMQTemplate.send("order", MessageBuilder.withPayload(orderInfo).build());
         return responseResult;
     }
 }
