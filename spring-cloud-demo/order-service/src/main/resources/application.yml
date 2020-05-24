@@ -1,0 +1,25 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_db?useUnicode=true&useSSL=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8763/eureka/
+    # 每隔3秒拉取一次服务注册列表
+    registryFetchIntervalSeconds: 3
+    # 每隔3秒发送一次心跳
+    leaseExpirationDurationInSeconds: 3
+
+
+
+

@@ -1,0 +1,22 @@
+server:
+  port: 8763
+  address: localhost
+eureka:
+  instance:
+    hostname: localhost
+    # 后台线程检测服务心跳如果超过9秒直接剔除服务
+    leaseExpirationDurationInSeconds: 9
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8763/eureka/
+  server:
+      enableSelfPreservation: true
+      # 后台线程每隔6秒将readwrite cache同步给read only cache
+      responseCacheUpdateIntervalMs: 6000
+      # 后台线程每隔6秒检测服务上一次心跳时间
+      evictionIntervalTimerInMs: 6000
+spring:
+  application:
+    name: shopping-eureka
