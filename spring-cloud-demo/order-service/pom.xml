@@ -15,8 +15,14 @@
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot</artifactId>
-            <version>2.1.1</version>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.utils</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 </project>
