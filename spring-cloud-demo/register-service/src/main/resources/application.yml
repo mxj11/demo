@@ -19,4 +19,4 @@ eureka:
       evictionIntervalTimerInMs: 6000
 spring:
   application:
-    name: shopping-eureka
+    name: register-service

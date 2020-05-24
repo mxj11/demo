@@ -12,4 +12,11 @@
     <artifactId>order-service</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+    </dependencies>
 </project>
